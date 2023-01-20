@@ -83,7 +83,7 @@ async function viewsCategorie(listCategories) {
 
 callApiProjectsCategories()
 
-// Ajout des event
+// Ajout des events
 
 const groupBtn = document.querySelector('#btnChoiceConteneur');
 
@@ -101,9 +101,7 @@ groupBtn.addEventListener("click", (event) => {
         else {
             viewsProjects(projectsList);
         }
-      
-
-        
+              
     }
 })
 
