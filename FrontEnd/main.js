@@ -1,5 +1,7 @@
 // Import des scripts 
 
+// Import API 
+import "./assets/js/api.js";
 
 // Import Fichier relatif au project
 import "./assets/js/project.js";
@@ -7,8 +9,7 @@ import "./assets/js/project.js";
 // Import Login 
 import "./assets/js/login.js";
 
-// Import API 
-import "./assets/js/api.js";
+
 
 
 const navigation = document.querySelector('nav');

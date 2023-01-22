@@ -1,7 +1,7 @@
 // Authentification et stockage dans une variable de Session.
-let TokenSauvegarde;
+export let TokenSauvegarde;
 
-async function createconnection(emailReq, mpReq) {
+export async function createconnection(emailReq, mpReq) {
 
     // controle les variables email et mp 
     const emailVerif = emailReq; 
@@ -14,14 +14,25 @@ async function createconnection(emailReq, mpReq) {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({ email: emailVerif, password: mpVerif })
-      }).catch(console.error(Error));
+      });
 
-      const result = await Reponse.json();
-     if (Reponse.status == 200) {
-        return result.token;
-     }
-     else {
-       return "Erreur de connexion";
+
+    if (!Reponse.ok) {
+        if(Reponse.status === 404){
+          alert('Utilisateur non reconnu');
+        } else {
+          alert('Une erreur s\'est produite ');
+        }
+    }
+
+    const result = await Reponse.json();
+     if (Reponse.status === 200) {
+        TokenSauvegarde = result.token;
+        // Redirect vers la page d'accueil 
+
+        window.location.pathname = "/FrontEnd/index.html";
+        console.log('ON MODIFIE ? ');
+
      }
 }
 

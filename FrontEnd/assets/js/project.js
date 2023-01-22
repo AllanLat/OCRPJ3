@@ -78,7 +78,7 @@ async function viewsCategorie(listCategories) {
 }
 
 
-if(document.location.pathname == '/index.html') {
+if(document.location.pathname ==='/FrontEnd/' || document.location.pathname ==='/FrontEnd/index.html') {
 
     // Appel de la fonction inialisation
     callApiProjectsCategories()
