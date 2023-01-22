@@ -11,7 +11,6 @@ footer {
     background-color: #FFFFFF;
 }
 
-
 #loginForm {
     width: 440px;
     display: flex !important;
@@ -43,7 +42,6 @@ main {
     border: none;
 }
 
-
 .mb30 {
     margin-bottom: 30px;;
 }
@@ -54,10 +52,8 @@ main {
     font-weight: 500;
     font-size: 14px;
     line-height: 16px;
-
     color: #3D3D3D;
     margin-bottom: 10px;
-
 }
 
 #loginForm a {
