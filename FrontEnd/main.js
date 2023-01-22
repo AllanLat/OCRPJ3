@@ -9,24 +9,15 @@ import "./assets/js/project.js";
 // Import Login 
 import "./assets/js/login.js";
 
+// import Header
+import "./assets/js/header.js";
 
 
+// Dans un fichier HEADER serai plus approprier
+if (sessionStorage.getItem('TokenAuth0')) {
+    alert('Vous êtes connecter');
+    
+}
 
-const navigation = document.querySelector('nav');
-navigation.id = "nav";
-
-const btnLink = document.querySelector("#nav");
-const listNav = btnLink.querySelector("ul");
-
-
-const login = listNav.children[2];
-login.addEventListener('click', function(){
-    window.location.href = 'login.html';
-})
-
-const home = listNav.children[0];
-home.addEventListener('click', function(){
-    window.location.href = 'index.html';
-})
 
 

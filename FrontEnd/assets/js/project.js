@@ -78,11 +78,11 @@ async function viewsCategorie(listCategories) {
 }
 
 
-if(document.location.pathname ==='/FrontEnd/' || document.location.pathname ==='/FrontEnd/index.html') {
+if(document.location.pathname == '/FrontEnd/' || document.location.pathname == '/FrontEnd/index.html') {
 
     // Appel de la fonction inialisation
     callApiProjectsCategories()
-
+    
     // Ajout des event
    const groupBtn = document.querySelector('#btnChoiceConteneur'); 
    groupBtn.addEventListener("click", (event) => {

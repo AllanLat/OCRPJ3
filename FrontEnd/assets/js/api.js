@@ -1,5 +1,6 @@
 // Authentification et stockage dans une variable de Session.
-export let TokenSauvegarde;
+let TokenSauvegarde;
+
 
 export async function createconnection(emailReq, mpReq) {
 
@@ -18,10 +19,12 @@ export async function createconnection(emailReq, mpReq) {
 
 
     if (!Reponse.ok) {
+        
+
         if(Reponse.status === 404){
-          alert('Utilisateur non reconnu');
+          
         } else {
-          alert('Une erreur s\'est produite ');
+          
         }
     }
 
@@ -29,9 +32,8 @@ export async function createconnection(emailReq, mpReq) {
      if (Reponse.status === 200) {
         TokenSauvegarde = result.token;
         // Redirect vers la page d'accueil 
-
+        sessionStorage.setItem('TokenAuth0', TokenSauvegarde);
         window.location.pathname = "/FrontEnd/index.html";
-        console.log('ON MODIFIE ? ');
 
      }
 }
