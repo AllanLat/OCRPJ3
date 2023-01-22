@@ -17,7 +17,6 @@ import { validateUrl } from "./assets/js/tools.js";
 // Dans un fichier HEADER serai plus approprier
 if (sessionStorage.getItem('TokenAuth0')) {
     alert('Vous êtes connecter');
-
 }
 
 

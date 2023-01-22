@@ -25,12 +25,11 @@ export async function createconnection(emailReq, mpReq) {
         alertMessage.className = 'alertLogin';
         const placementMessage = form.childNodes[2];
        
-        
         if(Reponse.status === 404){
-            alertMessage.innerText = 'Utilisateur non reconnu';
+            alertMessage.innerText = 'Erreur dans l’identifiant';
             
         } else {
-            alertMessage.innerText = 'Utilisateur ou mot de passe non reconnu';
+            alertMessage.innerText = 'Erreur dans l’identifiant ou le mot de passe';
         } 
         
         form.insertBefore(alertMessage, placementMessage);
