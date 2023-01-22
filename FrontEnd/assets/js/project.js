@@ -1,4 +1,5 @@
 // List des import.
+import { validateUrl } from "./tools.js";
 
 // Variables global
 let projectsList;
@@ -78,7 +79,7 @@ async function viewsCategorie(listCategories) {
 }
 
 
-if(document.location.pathname == '/FrontEnd/' || document.location.pathname == '/FrontEnd/index.html') {
+if(validateUrl('index')) {
 
     // Appel de la fonction inialisation
     callApiProjectsCategories()

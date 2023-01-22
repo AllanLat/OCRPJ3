@@ -1,6 +1,8 @@
 // Authentification et stockage dans une variable de Session.
 let TokenSauvegarde;
 
+const form = document.querySelector('#loginForm');
+const alertMessage = document.createElement('h2');
 
 export async function createconnection(emailReq, mpReq) {
 
@@ -19,13 +21,19 @@ export async function createconnection(emailReq, mpReq) {
 
 
     if (!Reponse.ok) {
-        
 
+        alertMessage.className = 'alertLogin';
+        const placementMessage = form.childNodes[2];
+       
+        
         if(Reponse.status === 404){
-          
+            alertMessage.innerText = 'Utilisateur non reconnu';
+            
         } else {
-          
-        }
+            alertMessage.innerText = 'Utilisateur ou mot de passe non reconnu';
+        } 
+        
+        form.insertBefore(alertMessage, placementMessage);
     }
 
     const result = await Reponse.json();

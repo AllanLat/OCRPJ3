@@ -1,6 +1,7 @@
 import { createconnection } from "./api.js";
+import { validateUrl } from "./tools.js";
 
-if(document.location.pathname ==='/FrontEnd/login.html') {
+if(validateUrl('login')) {
     const form = document.querySelector("#loginForm");
     let data = {};
 

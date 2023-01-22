@@ -219,3 +219,10 @@ footer nav ul {
 
 
 /* login page css */
+
+.alertLogin {
+	font-style: italic;
+	font-size: 18px;
+	color: rgba(255, 0, 0, 0.554);
+	margin-bottom: 30px;
+}
