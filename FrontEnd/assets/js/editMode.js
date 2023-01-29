@@ -17,6 +17,19 @@ if(sessionStorage.getItem('TokenAuth0')) {
 
     const headerMargin = document.querySelector('header');
     headerMargin.style.margin = '100px 0px';
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 else {
     const headerMargin = document.querySelector('header');
