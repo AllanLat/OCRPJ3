@@ -11,6 +11,5 @@ export function validateUrl(page){
         }
     }
     
-    console.log(validatedUrl);
     return validatedUrl;
 }

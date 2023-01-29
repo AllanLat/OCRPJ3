@@ -7,10 +7,18 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
-	<meta name="description" content="">
+	<meta name="description" content="home page">
 	<link rel="stylesheet" href="./assets/style.css">
+	<link rel="stylesheet" href="./assets/css/edit.css">
+	<script async src="https://kit.fontawesome.com/3acb895cee.js" crossorigin="anonymous"></script>
 </head>
 <body>
+<!-- edition Bar -->
+<section id="editBar" class="edit">
+	<button><i class="fa-solid fa-pen-to-square"></i> Mode édition</button>
+	<button id="exitEditMode">publier les changements</button>
+</section>
+<!-- edition Bar END -->
 <header>
 	<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
 	<nav id="nav">
@@ -26,8 +34,14 @@
 	<section id="introduction">
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
+			<div class="my-30 edit">
+				<a id="editIntroductionImg" ><i class="fa-solid fa-pen-to-square"></i> modifier</a>
+			</div>
 		</figure>
 		<article>
+			<div class="my-30 edit">
+				<a id="editIntroduction"><i class="fa-solid fa-pen-to-square"></i> modifier</a>
+			</div>
 			<h2>Designer d'espace</h2>
 			<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
 			<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
@@ -35,7 +49,7 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+		<h2>Mes Projets <a id="editProject" class="edit"><i class="fa-solid fa-pen-to-square"></i> modifier</a></h2>
 		<div id="btnChoiceConteneur">
 		</div>
 		<div class="gallery">
@@ -66,7 +80,9 @@
 </footer>
 
 <!-- JS add  -->
+
 <script src="main.js" type="module"></script>
+
 </body>
 
 </html>

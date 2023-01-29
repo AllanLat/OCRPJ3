@@ -1,0 +1,74 @@
+/* CSS for edit mode and modal */
+/* ne doit s'appliquer qu'en mode edition*/
+body {
+    overflow-x: hidden;
+}
+
+#editBar {
+    background-color: black !important;
+    width: 100vw;
+    margin-top: 0px;
+    margin-bottom: 0px;;
+    margin-right: auto;
+    margin-left: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: 30px;
+    
+    justify-content: center;
+    align-content: center;
+    padding: 15px;
+}
+
+#editBar button {
+    margin-left: 25px;
+    border: none;
+    font-family: 'Work Sans';
+}
+
+#editBar i {
+    color: #FFFFFF;
+}
+
+#editBar button#exitEditMode, #editBar button#exitEditMode:hover {
+    background-color: #FFFFFF !important;
+    color: black !important;
+    border-radius: 60px;
+    padding: 11px 23px;
+}
+
+#editBar button, #editBar button:hover {
+    background-color: black !important;
+    color: #FFFFFF;
+}
+
+
+header {
+     margin-top: 10vh;
+}
+
+.my-30 {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+#editIntroductionImg {
+    margin-left: 10%;
+}
+
+#editProject {
+    font-family: 'Work Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 46px;
+    text-align: center;
+    margin-left: 30px;
+
+}
+
+/* chnager l'etat en block ou flex lorsque que l'on passe en edit mode */
+.edit {
+    display: none;
+}

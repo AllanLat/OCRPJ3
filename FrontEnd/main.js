@@ -13,11 +13,10 @@ import "./assets/js/login.js";
 import "./assets/js/header.js";
 import { validateUrl } from "./assets/js/tools.js";
 
+// Edit mode 
+import "./assets/js/editMode.js";
 
-// Dans un fichier HEADER serai plus approprier
-if (sessionStorage.getItem('TokenAuth0')) {
-    alert('Vous êtes connecter');
-}
+
 
 
 

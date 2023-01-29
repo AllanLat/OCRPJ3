@@ -16,6 +16,8 @@ const login = listNav.children[2];
 if (sessionStorage.getItem('TokenAuth0')) {
     login.innerText = 'logout';
 }
+
+
 login.addEventListener('click', function(){
     if (sessionStorage.getItem('TokenAuth0')) {
         sessionStorage.clear('TokenAuth0');
@@ -26,4 +28,3 @@ login.addEventListener('click', function(){
         window.location.href = "./login.html";
     }
 })
-
