@@ -4,7 +4,11 @@ navigation.id = "nav";
 const btnLink = document.querySelector("#nav");
 const listNav = btnLink.querySelector("ul");
 
+const linkContact = listNav.children[1];
 
+linkContact.addEventListener('click', function() {
+    window.location.href = 'index.html#contact';
+})
 
 const home = listNav.children[0];
 home.addEventListener('click', function(){
