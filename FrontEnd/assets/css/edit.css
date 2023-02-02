@@ -76,9 +76,11 @@ header {
 
 
 /* modal */
+#modalEdit {
+    display: none;
+}
 
 .modalBox {
-    display: block;
     position: fixed;
     z-index: 100;
     top: 0;
@@ -99,6 +101,7 @@ header {
     min-height: 670px;
     border-radius: 10px;
 }
+
 
 .modal-content {
     padding: 15px 75px;

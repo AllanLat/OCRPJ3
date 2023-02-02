@@ -2,10 +2,10 @@
 import { validateUrl } from "./tools.js";
 
 // Variables global
-let projectsList;
+export let projectsList;
 let categories;
 
-async function callApiProjectsCategories() {
+export async function callApiProjectsCategories() {
 
     const projectsCategories =  await fetch("http://localhost:5678/api/works");
     const projects = await projectsCategories.json();
