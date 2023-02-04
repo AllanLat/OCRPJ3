@@ -55,6 +55,7 @@ async function viewsCategorie(listCategories) {
 
     // Création du button All : 
     const btnChoiceConteneur = document.querySelector('#btnChoiceConteneur');
+    btnChoiceConteneur.innerHTML = '';
     const buttonDefault = document.createElement('button');
     buttonDefault.id = "resetButtonCategorie";
     buttonDefault.innerText = "Tous";

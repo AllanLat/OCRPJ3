@@ -73,23 +73,72 @@ if(sessionStorage.getItem('TokenAuth0')) {
     
         }
 
+        const deletedButtons = document.querySelectorAll('.delete');
+
+        for(let i = 0; i < deletedButtons.length; i++) {
+            console.log(JSON.stringify(deletedButtons[i].innerText));
+
+            deletedButtons[i].addEventListener('click', function() {
+                const button = deletedButtons[i];
+                const dateId = button.getAttribute("data-id-delete");
+
+                deletedProduct(dateId);
+            });
+        }
 
     }
 
 
-    const deleted = document.querySelector('.delete');
+    async function deletedProduct(dataId){
+        const token = sessionStorage.getItem('TokenAuth0');
 
-    console.log(deleted);
-    deleted.addEventListener('click', function() {
-        const result = deleted.getAttribute("data-id-delete");
-        console.log(result);
-    });
+        const result = await fetch(`http://localhost:5678/api/works/id=${dataId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: ''
+        });
 
+        if(result.ok) {
+            await callApiProjectsCategories();
+            await modalViews();
+        }
+        else {
+            return false
+        }
 
+    }
 
+    async function addNewProject(idCategorie, titleString, _UrlIMG) {
+        const token = sessionStorage.getItem('TokenAuth0');
+        console.log(token);
 
-
-
+        const headers = new Headers({
+            'Authorization': `Bearer ${token}`,
+            'Content-type': 'application/json',
+        });
+      
+        const response = await fetch('http://localhost:5678/api/works', {
+          method: 'POST',
+          headers: headers,
+          body: JSON.stringify({
+            title: titleString,
+            image: 'image=@abajour-tahina.png;type=image/png',
+            category: idCategorie
+          })
+        });
+      
+        if (!response.ok) {
+          throw new Error(`Error adding project: ${response.statusText}`);
+        }
+      
+        const json = await response.json();
+        return json;
+    }
+    //const addnew = await addNewProject('1', 'ceci est un tests', 'https://via.placeholder.com/400x400');
+    
 
 }
 else {
