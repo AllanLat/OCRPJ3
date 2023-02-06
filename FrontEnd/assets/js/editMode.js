@@ -3,6 +3,7 @@ import { projectsList } from "./project.js";
 import { callApiProjectsCategories } from "./project.js";
 
 if(sessionStorage.getItem('TokenAuth0')) {
+
     const classEdit = document.getElementsByClassName("edit");
     for (var i = 0; i < classEdit.length; i++) {
         classEdit[i].style.display = "block";
@@ -24,20 +25,32 @@ if(sessionStorage.getItem('TokenAuth0')) {
     const openModal = document.querySelector('#editProject');
     const modal = document.querySelector('#modalEdit');
 
-    closeModal.addEventListener('click', function() {
-        modal.style.display = "none";
-        callApiProjectsCategories();
-    });
+  
 
     openModal.addEventListener('click', function() {
-        modal.style.display = "block";
         modalViews();
+        modal.style.display = "block";
     });
     
+    const closeModals = () => {
+        modal.style.display = 'none';
+    };
+
+    closeModal.addEventListener('click', function() {
+        closeModals();
+    });
+
+    window.addEventListener('click', event => {
+        if (event.target === modal) {
+            closeModals();
+        }
+    });
     
 
-    async function modalViews() {
+    // END Create Modal
 
+    async function modalViews() {
+        
         const gallery = document.querySelector(".content");
         gallery.innerHTML = ""; 
     
@@ -54,7 +67,8 @@ if(sessionStorage.getItem('TokenAuth0')) {
 
             const outils = document.createElement('div');
             outils.className = 'outils';
-            outils.innerHTML = '<button><i class="fa-solid fa-arrows-up-down-left-right"></i></button><button class="delete" ><i class="fa-solid fa-trash-can"></i></button>';
+            outils.innerHTML = '<button><i class="fa-solid fa-arrows-up-down-left-right"></i></button>'+
+            '<button class="delete" ><i class="fa-solid fa-trash-can"></i></button>';
             projectImg.appendChild(outils);
 
             const buttonDelete = outils.children[1];
@@ -74,42 +88,47 @@ if(sessionStorage.getItem('TokenAuth0')) {
         }
 
         const deletedButtons = document.querySelectorAll('.delete');
-
         for(let i = 0; i < deletedButtons.length; i++) {
-            console.log(JSON.stringify(deletedButtons[i].innerText));
-
-            deletedButtons[i].addEventListener('click', function() {
+            
+            deletedButtons[i].addEventListener('click', async function(event) {
+                event.preventDefault()
+             
                 const button = deletedButtons[i];
                 const dateId = button.getAttribute("data-id-delete");
+                const retour = await deletedProduct(dateId);
+                console.log(retour);
 
-                deletedProduct(dateId);
             });
         }
 
+        async function deletedProduct(dataId){
+                const token = sessionStorage.getItem('TokenAuth0');
+
+                const rep = await fetch(`http://localhost:5678/api/works/${dataId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    }
+                });
+                const res = rep.status;
+
+                console.log(res);
+
+                if(rep.ok === true) {
+                    console.log('yes');
+                    return true;
+                }
+                else {
+                    console.log('mince');
+                    return false;
+                }
+
+            }
+
     }
 
 
-    async function deletedProduct(dataId){
-        const token = sessionStorage.getItem('TokenAuth0');
-
-        const result = await fetch(`http://localhost:5678/api/works/id=${dataId}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`,
-            },
-            body: ''
-        });
-
-        if(result.ok) {
-            await callApiProjectsCategories();
-            await modalViews();
-        }
-        else {
-            return false
-        }
-
-    }
+  
 
     async function addNewProject(idCategorie, titleString, _UrlIMG) {
         const token = sessionStorage.getItem('TokenAuth0');
