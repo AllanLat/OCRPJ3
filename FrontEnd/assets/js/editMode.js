@@ -1,6 +1,6 @@
 // Edit mode and modal function.
 import { projectsList } from "./project.js";
-import { callApiProjectsCategories } from "./project.js";
+import { deletedProduct } from "./api.js";
 
 if(sessionStorage.getItem('TokenAuth0')) {
 
@@ -24,8 +24,8 @@ if(sessionStorage.getItem('TokenAuth0')) {
     const closeModal = document.querySelector('.close');
     const openModal = document.querySelector('#editProject');
     const modal = document.querySelector('#modalEdit');
-
-  
+    const formButtons = document.querySelector('#addPhoto');
+    const retourGallery = document.querySelector(".goBack");
 
     openModal.addEventListener('click', function() {
         modalViews();
@@ -41,21 +41,37 @@ if(sessionStorage.getItem('TokenAuth0')) {
     });
 
     window.addEventListener('click', event => {
+        event.preventDefault();
+
         if (event.target === modal) {
             closeModals();
         }
     });
     
+    formButtons.addEventListener('click', function() {
+        modalFormViews()
+        retourGallery.style.display = "block";
+    });
+    
+    retourGallery.addEventListener('click', function() {
+        retourGallery.style.display = "none";
+        modalViews();
+    })
 
-    // END Create Modal
+}
+else {
+    const headerMargin = document.querySelector('header');
+    headerMargin.style.margin = '50px 0px';
+}
 
-    async function modalViews() {
+export async function modalViews() {
         
-        const gallery = document.querySelector(".content");
-        gallery.innerHTML = ""; 
-    
-        const worksJson = projectsList;
-    
+    const gallery = document.querySelector(".content");
+    gallery.innerHTML = ""; 
+
+    const worksJson = projectsList;
+
+    if (worksJson.length > 0){
         // Create loop
         for(let i = 0; i < worksJson.length; i++) {
 
@@ -88,79 +104,41 @@ if(sessionStorage.getItem('TokenAuth0')) {
         }
 
         const deletedButtons = document.querySelectorAll('.delete');
+
         for(let i = 0; i < deletedButtons.length; i++) {
             
-            deletedButtons[i].addEventListener('click', async function(event) {
+            deletedButtons[i].addEventListener('click', function(event) {
                 event.preventDefault()
-             
+            
                 const button = deletedButtons[i];
                 const dateId = button.getAttribute("data-id-delete");
-                const retour = await deletedProduct(dateId);
-                console.log(retour);
+                deletedProduct(dateId);
 
             });
         }
 
-        async function deletedProduct(dataId){
-                const token = sessionStorage.getItem('TokenAuth0');
-
-                const rep = await fetch(`http://localhost:5678/api/works/${dataId}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                    }
-                });
-                const res = rep.status;
-
-                console.log(res);
-
-                if(rep.ok === true) {
-                    console.log('yes');
-                    return true;
-                }
-                else {
-                    console.log('mince');
-                    return false;
-                }
-
-            }
-
+   
     }
-
-
-  
-
-    async function addNewProject(idCategorie, titleString, _UrlIMG) {
-        const token = sessionStorage.getItem('TokenAuth0');
-        console.log(token);
-
-        const headers = new Headers({
-            'Authorization': `Bearer ${token}`,
-            'Content-type': 'application/json',
-        });
-      
-        const response = await fetch('http://localhost:5678/api/works', {
-          method: 'POST',
-          headers: headers,
-          body: JSON.stringify({
-            title: titleString,
-            image: 'image=@abajour-tahina.png;type=image/png',
-            category: idCategorie
-          })
-        });
-      
-        if (!response.ok) {
-          throw new Error(`Error adding project: ${response.statusText}`);
-        }
-      
-        const json = await response.json();
-        return json;
-    }
-    //const addnew = await addNewProject('1', 'ceci est un tests', 'https://via.placeholder.com/400x400');
-    
 
 }
-else {
-    const headerMargin = document.querySelector('header');
-    headerMargin.style.margin = '50px 0px';
+
+
+function modalFormViews() {
+    const formParent = document.querySelector(".content");
+    formParent.innerHTML = '';
+
+    const form = document.createElement('form');
+
+    const inputFile = document.createElement('input');
+    const inputTitle = document.createElement('input');
+    const inputSelect = document.createElement('select');
+
+    inputFile.type = 'file';
+    inputTitle.type = 'text';
+
+    form.appendChild(inputFile);
+    form.appendChild(inputTitle);
+    form.appendChild(inputSelect);
+
+    formParent.appendChild(form);
 }

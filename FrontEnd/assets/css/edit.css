@@ -65,7 +65,8 @@ header {
     line-height: 46px;
     text-align: center;
     margin-left: 30px;
-
+    border: none;
+    background: none;
 }
 
 /* chnager l'etat en block ou flex lorsque que l'on passe en edit mode */
@@ -141,7 +142,7 @@ header {
     color: #000000;
 }
 
-#validation {   
+.validation {   
     margin-top: 40px;
     margin-bottom: 20px;
     background: #1D6154;
@@ -220,3 +221,6 @@ header {
     display: flex;
 }
 
+.goBack {
+    display: none;
+}

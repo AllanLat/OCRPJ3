@@ -1,4 +1,7 @@
 // Authentification et stockage dans une variable de Session.
+import { callApiProjectsCategories } from "./project.js";
+import { modalViews } from "./editMode.js";
+
 let TokenSauvegarde;
 
 const form = document.querySelector('#loginForm');
@@ -40,8 +43,29 @@ export async function createconnection(emailReq, mpReq) {
         TokenSauvegarde = result.token;
         // Redirect vers la page d'accueil 
         sessionStorage.setItem('TokenAuth0', TokenSauvegarde);
-        window.location.pathname = "/FrontEnd/index.html";
+        window.location.pathname = "./FrontEnd/index.html";
 
      }
+}
+
+export async function deletedProduct(dataId){
+  const token = sessionStorage.getItem('TokenAuth0');
+
+  const rep = await fetch(`http://localhost:5678/api/works/${dataId}`, {
+      method: 'DELETE',
+      headers: {
+          'Authorization': `Bearer ${token}`,
+      }
+  });
+
+  if(rep.status === 204) {
+      callApiProjectsCategories();
+      modalViews();
+  }
+  else {
+    console.log(rep.status);
+     alert('Une erreur est survenu');
+  }
+
 }
 
