@@ -14,3 +14,6 @@
 
     // Edit mode 
     import "./assets/js/editMode.js";
+
+    // Modal 
+    import "./assets/js/formModal.js";

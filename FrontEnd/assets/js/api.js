@@ -29,7 +29,7 @@ export async function createconnection(emailReq, mpReq) {
         const placementMessage = form.childNodes[2];
        
         if(Reponse.status === 404){
-            alertMessage.innerText = 'Erreur dans l’identifiant';
+            alertMessage.innerText = 'Erreur dans l’identifiant ou le mot de passe';
             
         } else {
             alertMessage.innerText = 'Erreur dans l’identifiant ou le mot de passe';
@@ -64,8 +64,50 @@ export async function deletedProduct(dataId){
   }
   else {
     console.log(rep.status);
-     alert('Une erreur est survenu');
+     alert('Une erreur est survenue');
   }
 
 }
 
+export async function viewsCategory(){
+  const categorys = await fetch('http://localhost:5678/api/categories');
+  const category = await categorys.json();
+
+  if (categorys.status === 200) {
+    console.log(category);
+    return category;
+  } else {
+    return false;
+  }
+
+}
+
+export async function addProject(datas){
+  const token = sessionStorage.getItem('TokenAuth0');
+ 
+  //console.log(dataJson.file);
+
+  const rep = await fetch(`http://localhost:5678/api/works`, {
+      method: 'POST',
+      headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-type': 'multipart/form-data',
+      },
+      body: new FormData(datas)
+      // body: JSON.stringify( {
+      //   image: '',
+      //   title: datas.title,
+      //   category: datas.category,
+      // })
+  });
+
+  if(rep.status === 201) {
+      callApiProjectsCategories();
+      modalViews();
+  }
+  else {
+    console.log(rep);
+     alert('Une erreur est survenue');
+  }
+
+}

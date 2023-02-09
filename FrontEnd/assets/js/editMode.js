@@ -1,6 +1,7 @@
 // Edit mode and modal function.
 import { projectsList } from "./project.js";
 import { deletedProduct } from "./api.js";
+import { modalFormViews } from "./formModal.js";
 
 if(sessionStorage.getItem('TokenAuth0')) {
 
@@ -49,12 +50,12 @@ if(sessionStorage.getItem('TokenAuth0')) {
     });
     
     formButtons.addEventListener('click', function() {
-        modalFormViews()
         retourGallery.style.display = "block";
+        modalFormViews();
     });
     
     retourGallery.addEventListener('click', function() {
-        retourGallery.style.display = "none";
+        retourGallery.style.visibility = "hidden";
         modalViews();
     })
 
@@ -68,6 +69,9 @@ export async function modalViews() {
         
     const gallery = document.querySelector(".content");
     gallery.innerHTML = ""; 
+
+    const buttonValidation = document.querySelector('#addPhoto');
+    buttonValidation.innerText = 'Ajouter une photo';
 
     const worksJson = projectsList;
 
@@ -122,23 +126,3 @@ export async function modalViews() {
 
 }
 
-
-function modalFormViews() {
-    const formParent = document.querySelector(".content");
-    formParent.innerHTML = '';
-
-    const form = document.createElement('form');
-
-    const inputFile = document.createElement('input');
-    const inputTitle = document.createElement('input');
-    const inputSelect = document.createElement('select');
-
-    inputFile.type = 'file';
-    inputTitle.type = 'text';
-
-    form.appendChild(inputFile);
-    form.appendChild(inputTitle);
-    form.appendChild(inputSelect);
-
-    formParent.appendChild(form);
-}
