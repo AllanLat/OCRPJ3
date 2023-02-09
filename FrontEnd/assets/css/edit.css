@@ -263,9 +263,9 @@ form input[type=text], select {
     
   }
 
-  /* #fileInput {
+  #fileInput {
    visibility: hidden;
-  } */
+  }
 
   #btnInputFile {
     background: #CBD6DC;
