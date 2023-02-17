@@ -1,4 +1,5 @@
 import { addProject, viewsCategory } from "./api.js";
+import { modalViews } from "./modal.js";
 
 async function includeFile(filePath) {
     try {
@@ -27,7 +28,7 @@ export async function modalFormViews() {
     // Affficher les categories
     const inputSelect = document.querySelector('#FileCategorySelect')
     const optionsCategory = await viewsCategory();
-    console.log(optionsCategory)
+    //console.log(optionsCategory)
     for (let i = 0; i < optionsCategory.length;i++) {
        const option = document.createElement('option');
        option.value =  optionsCategory[i].id;
@@ -110,10 +111,16 @@ export async function modalFormViews() {
         reader.readAsDataURL(file);
     });
 
-
+    let isAddingProject = false;
+    
     //  Traitement du Formulaire 
     btnAddProject.addEventListener('click', async event => {
         event.preventDefault();
+        if (isAddingProject) {
+            return; // Ignore les clics supplémentaires lorsque la fonction est en cours d'exécution
+          }
+          isAddingProject = true;
+
         const formData = new FormData();
         // Ajout des valeurs des champs à l'objet FormData
         formData.append('image', document.getElementById('fileInput').files[0]);
@@ -122,6 +129,8 @@ export async function modalFormViews() {
         
 
         await addProject(formData);
+
+        modalViews();
     });
    
     

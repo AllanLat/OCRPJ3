@@ -27,7 +27,7 @@ if(publier) {
     publier.addEventListener('click', function(){
     if (sessionStorage.getItem('TokenAuth0')) {
         sessionStorage.clear('TokenAuth0');
-        console.log(sessionStorage)
+       // console.log(sessionStorage)
         window.location.href = "./login.html";
     }
     else {
@@ -41,7 +41,7 @@ if(publier) {
 login.addEventListener('click', function(){
     if (sessionStorage.getItem('TokenAuth0')) {
         sessionStorage.clear('TokenAuth0');
-        console.log(sessionStorage)
+        //console.log(sessionStorage)
         window.location.href = "./login.html";
     }
     else {

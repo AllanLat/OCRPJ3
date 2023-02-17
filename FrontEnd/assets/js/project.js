@@ -26,11 +26,10 @@ async function viewsProjects(listProject) {
     const gallery = document.querySelector(".gallery");
     gallery.innerHTML = ""; 
 
-    console.log('test');
 
     const worksJson = listProject;
      if(worksJson.length > 0) {
-        console.log('teest');
+        
         // Create loop
         for(let i = 0; i < worksJson.length; i++) {
             

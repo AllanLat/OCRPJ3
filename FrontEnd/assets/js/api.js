@@ -88,7 +88,7 @@ export async function viewsCategory(){
 
 export async function addProject(datas){
   const token = sessionStorage.getItem('TokenAuth0');
-
+  console.log(datas)
   const rep = await fetch('http://localhost:5678/api/works', {
       method: 'POST',
       headers: {
