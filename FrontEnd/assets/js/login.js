@@ -1,5 +1,6 @@
 import { createconnection } from "./api.js";
 import { validateUrl } from "./tools.js";
+import "./header.js";
 
 if(validateUrl('login')) {
     const form = document.querySelector("#loginForm");

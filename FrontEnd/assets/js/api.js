@@ -1,6 +1,6 @@
 // Authentification et stockage dans une variable de Session.
 import { callApiProjectsCategories } from "./project.js";
-import { modalViews } from "./editMode.js";
+import { modalViews } from "./modal.js";
 
 let TokenSauvegarde;
 
@@ -51,7 +51,8 @@ export async function createconnection(emailReq, mpReq) {
 export async function deletedProduct(dataId){
   const token = sessionStorage.getItem('TokenAuth0');
 
-  const rep = await fetch(`http://localhost:5678/api/works/${dataId}`, {
+  if(window.confirm("Voulez-vous vraiment supprimer le projet ?")) {
+    const rep = await fetch(`http://localhost:5678/api/works/${dataId}`, {
       method: 'DELETE',
       headers: {
           'Authorization': `Bearer ${token}`,
@@ -59,13 +60,16 @@ export async function deletedProduct(dataId){
   });
 
   if(rep.status === 204) {
-      callApiProjectsCategories();
-      modalViews();
+     await callApiProjectsCategories();
+    
   }
   else {
     console.log(rep.status);
      alert('Une erreur est survenue');
   }
+
+  }
+  
 
 }
 
@@ -74,7 +78,7 @@ export async function viewsCategory(){
   const category = await categorys.json();
 
   if (categorys.status === 200) {
-    console.log(category);
+    //console.log(category);
     return category;
   } else {
     return false;
@@ -84,26 +88,17 @@ export async function viewsCategory(){
 
 export async function addProject(datas){
   const token = sessionStorage.getItem('TokenAuth0');
- 
-  //console.log(dataJson.file);
 
-  const rep = await fetch(`http://localhost:5678/api/works`, {
+  const rep = await fetch('http://localhost:5678/api/works', {
       method: 'POST',
       headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-type': 'multipart/form-data',
+      'Authorization': `Bearer ${token}`
       },
-      body: new FormData(datas)
-      // body: JSON.stringify( {
-      //   image: '',
-      //   title: datas.title,
-      //   category: datas.category,
-      // })
-  });
+      body: datas
+    });
 
   if(rep.status === 201) {
-      callApiProjectsCategories();
-      modalViews();
+    await callApiProjectsCategories();
   }
   else {
     console.log(rep);

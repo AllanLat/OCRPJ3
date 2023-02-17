@@ -26,25 +26,44 @@ async function viewsProjects(listProject) {
     const gallery = document.querySelector(".gallery");
     gallery.innerHTML = ""; 
 
+    console.log('test');
+
     const worksJson = listProject;
+     if(worksJson.length > 0) {
+        console.log('teest');
+        // Create loop
+        for(let i = 0; i < worksJson.length; i++) {
+            
+            const figure = document.createElement('figure');
+            const img = document.createElement('img');
+            const figCaption = document.createElement('figcaption');
 
-    // Create loop
-    for(let i = 0; i < worksJson.length; i++) {
+            img.src = worksJson[i].imageUrl;
+            img.alt = worksJson[i].title;
+            img.crossOrigin = "anonymous";
+            figCaption.innerText = worksJson[i].title;
+
+            figure.appendChild(img);
+            figure.appendChild(figCaption);
+            gallery.appendChild(figure);
+
+        }
+     }
+     else {
+        if (!document.getElementById('erreur-project')) {
+            const portefolio = document.getElementById('portfolio');
+            const message = document.createElement('h2');
+            message.id = 'erreur-project';
+            message.innerText = 'Aucun projet dans la gallery . . .';
+            message.style.textAlign = 'center';
+            message.style.width = '100%';
+            console.log('test');
+            portefolio.style.minHeight = '40vh'
         
-        const figure = document.createElement('figure');
-        const img = document.createElement('img');
-        const figCaption = document.createElement('figcaption');
-
-        img.src = worksJson[i].imageUrl;
-        img.alt = worksJson[i].title;
-        img.crossOrigin = "anonymous";
-        figCaption.innerText = worksJson[i].title;
-
-        figure.appendChild(img);
-        figure.appendChild(figCaption);
-        gallery.appendChild(figure);
-
-    }
+            portefolio.insertBefore(message, gallery);
+        }
+       
+     }
 }
 
 async function viewsCategorie(listCategories) {

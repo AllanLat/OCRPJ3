@@ -21,6 +21,22 @@ if (sessionStorage.getItem('TokenAuth0')) {
     login.innerText = 'logout';
 }
 
+const publier = document.querySelector('#exitEditMode');
+
+if(publier) {
+    publier.addEventListener('click', function(){
+    if (sessionStorage.getItem('TokenAuth0')) {
+        sessionStorage.clear('TokenAuth0');
+        console.log(sessionStorage)
+        window.location.href = "./login.html";
+    }
+    else {
+        window.location.href = "./login.html";
+    }
+})
+
+}
+
 
 login.addEventListener('click', function(){
     if (sessionStorage.getItem('TokenAuth0')) {
