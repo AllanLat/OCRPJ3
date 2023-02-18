@@ -1,12 +1,14 @@
-import { deletedProduct } from "./api.js";
-import { projectsList } from "./project.js";
+import { deletedProduct, projectsList } from "./api.js";
 
 export async function modalViews() {
         
-    console.log(projectsList);
+    //console.log(projectsList);
 
     const gallery = document.querySelector(".content");
     gallery.innerHTML = ""; 
+
+    const goBack = document.querySelector('.goBack');
+    goBack.style.visibility = 'hidden';
 
     const buttonValidation = document.querySelector('#addPhoto');
     buttonValidation.innerText = 'Ajouter une photo';

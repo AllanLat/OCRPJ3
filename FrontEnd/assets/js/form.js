@@ -111,6 +111,29 @@ export async function modalFormViews() {
         reader.readAsDataURL(file);
     });
 
+    function verifChamps() {
+        var champ1 = document.getElementById("fileInput").value;
+        var champ2 = document.getElementById("title").value;
+        var champ3 = document.getElementById("FileCategorySelect").value;
+        
+        if (champ1 == "" || champ2 == "" || champ3 == "") {
+          alert("Veuillez remplir tous les champs.");
+          return false;
+        }
+        else {
+          var titreEnc = encodeURIComponent(champ2); // encodage du titre
+          if (champ2 !== titreEnc) {
+            alert("Le champ titre contient des caractères non autorisés. Veuillez réessayer.");
+            return false;
+          }
+          else {
+            return true;
+          }
+        }
+      }
+      
+
+
     let isAddingProject = false;
     
     //  Traitement du Formulaire 
@@ -119,21 +142,48 @@ export async function modalFormViews() {
         if (isAddingProject) {
             return; // Ignore les clics supplémentaires lorsque la fonction est en cours d'exécution
           }
-          isAddingProject = true;
+        isAddingProject = true;
 
-        const formData = new FormData();
-        // Ajout des valeurs des champs à l'objet FormData
-        formData.append('image', document.getElementById('fileInput').files[0]);
-        formData.append('title', document.getElementById('title').value);
-        formData.append('category', document.getElementById('FileCategorySelect').value);
-        
+        if (verifChamps()) {
 
-        await addProject(formData);
+            const formData = new FormData();
+            // Ajout des valeurs des champs à l'objet FormData
+            formData.append('image', document.getElementById('fileInput').files[0]);
+            formData.append('title', document.getElementById('title').value);
+            formData.append('category', document.getElementById('FileCategorySelect').value);
+            
 
-        modalViews();
+            await addProject(formData);
+
+            await modalViews();
+        }
+        else {
+            await modalFormViews();
+        }
+          
+       
     });
    
-    
+    function verifChamps() {
+        const imageInput = document.getElementById("fileInput");
+        const titleInput = document.getElementById("title");
+        const selecytInput = document.getElementById("FileCategorySelect");
+        
+        if (imageInput.value == "" || titleInput.value == "" || selecytInput.value == "") {
+          alert("Veuillez remplir tous les champs.");
+          return false;
+        }
+        else {
+          var titleEnc = encodeURIComponent(titleInput.value); // encodage du titre
+          if (titleInput.value !== titleEnc) {
+            alert("Le champ titre contient des caractères non autorisés. Veuillez réessayer.");
+            return false;
+        }
+          else {
+            return true;
+          }
+        }
+      }
   
 
 }

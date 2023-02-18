@@ -1,27 +1,9 @@
 // List des import.
 import { validateUrl } from "./tools.js";
+import { projectsList, categories, callApiProjectsCategories} from "./api.js";
 
 // Variables global
-export let projectsList;
-let categories;
-
-export async function callApiProjectsCategories() {
-
-    const projectsCategories =  await fetch("http://localhost:5678/api/works");
-    const projects = await projectsCategories.json();
-
-    const categoriesOnJson = projects.map(itemCats => itemCats.category);
-    
-    projectsList = projects;
-    categories = categoriesOnJson;
-
-    // On appel l'affichage des btn et des project juste ici 
-    viewsCategorie(categories);
-    viewsProjects(projectsList);
-    // END call 
-}
-
-async function viewsProjects(listProject) {
+export async function viewsProjects(listProject) {
 
     const gallery = document.querySelector(".gallery");
     gallery.innerHTML = ""; 
@@ -65,7 +47,7 @@ async function viewsProjects(listProject) {
      }
 }
 
-async function viewsCategorie(listCategories) {
+export async function viewsCategorie(listCategories) {
 
     // On récupére le listing des catégories et 
     // On le trie avec Set de façon à ne resortir que les ids 

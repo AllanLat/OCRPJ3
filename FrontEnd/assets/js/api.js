@@ -1,6 +1,8 @@
 // Authentification et stockage dans une variable de Session.
-import { callApiProjectsCategories } from "./project.js";
-import { modalViews } from "./modal.js";
+import { viewsCategorie, viewsProjects } from "./project.js";
+
+export let projectsList = {};
+export let categories = {};
 
 let TokenSauvegarde;
 
@@ -88,7 +90,7 @@ export async function viewsCategory(){
 
 export async function addProject(datas){
   const token = sessionStorage.getItem('TokenAuth0');
-  console.log(datas)
+  //console.log(datas)
   const rep = await fetch('http://localhost:5678/api/works', {
       method: 'POST',
       headers: {
@@ -105,4 +107,21 @@ export async function addProject(datas){
      alert('Une erreur est survenue');
   }
 
+}
+
+
+export async function callApiProjectsCategories() {
+
+  const projectsCategories =  await fetch("http://localhost:5678/api/works");
+  const projects = await projectsCategories.json();
+
+  const categoriesOnJson = projects.map(itemCats => itemCats.category);
+  
+  projectsList = projects;
+  categories = categoriesOnJson;
+
+  // On appel l'affichage des btn et des project juste ici 
+  viewsCategorie(categories);
+  viewsProjects(projectsList);
+  // END call 
 }
