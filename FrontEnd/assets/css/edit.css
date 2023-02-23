@@ -74,8 +74,6 @@ header {
     display: none;
 }
 
-
-
 /* modal */
 #modalEdit {
     display: none;
@@ -102,7 +100,6 @@ header {
     min-height: 670px;
     border-radius: 10px;
 }
-
 
 .modal-content {
     padding: 15px 75px;

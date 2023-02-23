@@ -174,8 +174,9 @@ export async function modalFormViews() {
           return false;
         }
         else {
-          var titleEnc = encodeURIComponent(titleInput.value); // encodage du titre
-          if (titleInput.value !== titleEnc) {
+          const titleRegex = /^[a-zA-Z0-9\s:'"]+$/;
+          const isValidTitle = titleRegex.test(titleInput.value);
+          if (!isValidTitle) {
             alert("Le champ titre contient des caractères non autorisés. Veuillez réessayer.");
             return false;
         }

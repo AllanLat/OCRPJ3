@@ -50,7 +50,7 @@ export async function createconnection(emailReq, mpReq) {
      }
 }
 
-export async function deletedProduct(dataId){
+export async function deletedProject(dataId){
   const token = sessionStorage.getItem('TokenAuth0');
 
   if(window.confirm("Voulez-vous vraiment supprimer le projet ?")) {

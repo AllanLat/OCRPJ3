@@ -1,4 +1,4 @@
-import { deletedProduct, projectsList } from "./api.js";
+import { callApiProjectsCategories, deletedProject, projectsList } from "./api.js";
 
 export async function modalViews() {
         
@@ -61,7 +61,7 @@ export async function modalViews() {
             
                 const button = deletedButtons[i];
                 const dataId = button.getAttribute("data-id-delete");
-                await deletedProduct(dataId);
+                await deletedProject(dataId);
 
                 await modalViews();
             });
@@ -78,4 +78,5 @@ export async function modalViews() {
     }
 
 }
+
 
